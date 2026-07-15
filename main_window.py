@@ -251,7 +251,17 @@ class MainWindow(pyglet.window.Window):
     # draws bottom panel: TODO show correct image based on handedness and screen state
     def draw_bottom_panel(self):
         self.draw_panel_background(self.bottom_rect, BACKGROUND_COLOR)
-        image_path = "assets/bottom/fretboard_left_handed_scaled.png"
+
+        # dict based on handedness for the bottom panel images
+        correct_dict = BOTTOM_PANEL_IMAGE_DICT[self.handedness]
+
+        # image path based on current screen state
+        image_path = correct_dict.get(self.current_screen)
+
+        # if locked -> get locked image path
+        if self.locked:
+            image_path = correct_dict.get("locked")
+
         image = pyglet.image.load(image_path)
         x, y, w, h = self.bottom_rect
         image.blit(x, y, width=w, height=h)
