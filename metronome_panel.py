@@ -36,6 +36,12 @@ class MetronomePanel:
         }
         self.images = self.load_control_images()
 
+        # values for the metronome sound
+        self.click_length_s = 0.05
+        self.next_sound_allowed_at = 0.0
+        self.sound_path = os.path.join(base_dir, "assets", "sound", "beep.wav")
+
+
     # loads control images from the specified paths and returns a dictionary of loaded images
     def load_control_images(self):
         # make dict for images
@@ -90,9 +96,15 @@ class MetronomePanel:
 
     # called every metronome tick
     def tick(self, dt):
-        # flash circle and play beep sound
-        self.flash_until = time.time() + 0.12
-        winsound.Beep(1200, 30)
+        now = time.perf_counter()
+        if now < self.next_sound_allowed_at:
+            return
+        self.next_sound_allowed_at = now + self.click_length_s
+
+        winsound.PlaySound(
+            self.sound_path,
+            winsound.SND_FILENAME | winsound.SND_ASYNC | winsound.SND_NODEFAULT,
+        )
 
     # helper method to draw a text label
     def draw_label(self, text, x, y, size=14, color=(255, 255, 255, 255), anchor_x="left"):
@@ -146,11 +158,9 @@ class MetronomePanel:
         circle_x = x + w - 110
         circle_y = y + h - 120
 
-        # check if the metronome is currently flashing
-        active = time.time() < self.flash_until
 
-        # set the color of the circle based on whether it is active or not
-        color = (80, 200, 120) if active else (80, 80, 80)
+        # set the color of the circle based on whether it is running or not
+        color = (80, 200, 120) if self.running else (80, 80, 80)
 
         # draw circle
         shapes.Circle(circle_x, circle_y, 28, color=color).draw()
