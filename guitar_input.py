@@ -5,7 +5,7 @@ from collections import deque
 import numpy as np
 import sounddevice as sd
 
-from constants import *
+from guitar_input_constants import *
 
 # note names
 NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F",
@@ -138,8 +138,13 @@ class GuitarInput:
         # parabolic interpolation for peak refinement
         peak_refined = parabolic_interpolation(autocorrelation, peak_idx)
 
+        # to fix out of bounds error, clamp the peak_refined to be within the valid range of autocorrelation indices
+        peak_refined = max(
+            1.0, min(float(len(autocorrelation) - 1), peak_refined))
+
         # no valid peak found, return None
-        if peak_refined <= 0:
+        peak_index = int(round(peak_refined))
+        if peak_index < 0 or peak_index >= len(autocorrelation):
             return None, 0.0
 
         # calculate frequency
@@ -147,7 +152,7 @@ class GuitarInput:
 
         # confidence of the detected pitch based on the autocorrelation value at the peak
         confidence = float(
-            autocorrelation[int(round(peak_refined))] / (autocorrelation[0] + 1e-12))
+            autocorrelation[peak_index] / (autocorrelation[0] + 1e-12))
         return freq, confidence
 
     # update method to read audio data, detect pitch, and handle strike events
