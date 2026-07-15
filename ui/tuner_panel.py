@@ -1,8 +1,8 @@
 import pyglet
 from pyglet import shapes
-from main_window_constants import *
+from ui.main_window_constants import *
 
-from guitar_input import GuitarInput
+from guitar_controls.guitar_input import GuitarInput
 
 
 class TunerPanel:

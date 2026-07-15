@@ -1,5 +1,5 @@
 import sounddevice as sd
-from guitar_input import GuitarInput
+from guitar_controls.guitar_input import GuitarInput
 
 
 def choose_input_device():

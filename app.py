@@ -1,6 +1,6 @@
 import pyglet
-from setup_window import SetupWindow
-from main_window import MainWindow
+from ui.setup_window import SetupWindow
+from ui.main_window import MainWindow
 
 
 # launch app method

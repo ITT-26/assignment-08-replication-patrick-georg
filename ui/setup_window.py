@@ -2,7 +2,7 @@ import pyglet
 import sounddevice as sd
 from pyglet import shapes
 
-from main_window_constants import *
+from ui.main_window_constants import *
 
 
 class SetupWindow(pyglet.window.Window):

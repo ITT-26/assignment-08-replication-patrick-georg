@@ -4,14 +4,14 @@ from pyglet import shapes
 from pyglet import gl
 from pyglet.window import key
 
-from guitar_rig_preset_selector import GuitarRigPresetSelector
-from tuner_panel import TunerPanel
-from metronome_panel import MetronomePanel
-from preset_panel import PresetPanel
+from ui.guitar_rig_preset_selector import GuitarRigPresetSelector
+from ui.tuner_panel import TunerPanel
+from ui.metronome_panel import MetronomePanel
+from ui.preset_panel import PresetPanel
 
-from controller import GuitarController
+from guitar_controls.controller import GuitarController
 
-from main_window_constants import *
+from ui.main_window_constants import *
 
 
 class MainWindow(pyglet.window.Window):

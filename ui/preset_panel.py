@@ -5,7 +5,7 @@ import pyglet
 from pyglet import shapes
 from pyglet import gl
 
-from main_window_constants import *
+from ui.main_window_constants import *
 
 
 # will appear on top left

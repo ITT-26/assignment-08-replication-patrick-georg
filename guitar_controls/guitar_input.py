@@ -5,7 +5,7 @@ from collections import deque
 import numpy as np
 import sounddevice as sd
 
-from guitar_input_constants import *
+from guitar_controls.guitar_input_constants import *
 
 # note names
 NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F",
