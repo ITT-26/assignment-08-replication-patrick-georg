@@ -1,4 +1,4 @@
-# Replication (17/20)
+# Replication (17.5/20)
 
 ## Demo and Implementation
 Well done! 
@@ -10,4 +10,4 @@ Well done!
 
 ## Video
 
-- kind of minimalistic, no explanations (-0.5)
+- fine!
